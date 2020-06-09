@@ -30,7 +30,7 @@ app.post("/knight", async (req, res) => {
   }
 })
 
-app.listen(80, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("server has started on port 5000");
 })
 
