@@ -22,7 +22,7 @@ app.post("/knight", async (req, res) => {
     console.log(chess.ascii())
 
     function chessMoves(givenPosition) {
-      return chess.moves({ square: givenPosition }).map(m => m.substring(1).replace('#', ''))
+      return chess.moves({ square: givenPosition }).map(m => m.slice(1, 3))
     }
 
     let possibleMoves = chessMoves(position);
