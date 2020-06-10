@@ -30,7 +30,7 @@ app.post("/knight", async (req, res) => {
     let newPossibleMoves = []
     possibleMoves.forEach(element => {
       chess.put({ type: chess.KNIGHT, color: chess.WHITE }, element)
-      const temp = chess.moves({ square: element }).map(m => m.slice(m.length - 2, m.length))
+      const temp = chess.moves({ square: element }).map(m => m.slice(1, 3))
       newPossibleMoves = [...newPossibleMoves, ...temp].filter((x, index, self) => self.indexOf(x) === index)
     });
     console.log(newPossibleMoves)
