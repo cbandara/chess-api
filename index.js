@@ -21,10 +21,23 @@ app.post("/knight", async (req, res) => {
     chess.put({ type: chess.KNIGHT, color: chess.WHITE }, position)
     console.log(chess.ascii())
 
-    const possibleMoves = chess.moves({ square: position }).map(m => m.substring(1).replace('#', ''));
-    console.log(possibleMoves)
+    function chessMoves(givenPosition) {
+      return chess.moves({ square: givenPosition }).map(m => m.substring(1).replace('#', ''))
+    }
 
-    res.json(possibleMoves);
+    let possibleMoves = chessMoves(position);
+    console.log(possibleMoves)
+    let newPossibleMoves = []
+    possibleMoves.forEach(element => {
+      chess.put({ type: chess.KNIGHT, color: chess.WHITE }, element)
+      const temp = chess.moves({ square: element }).map(m => m.slice(m.length - 2, m.length))
+      newPossibleMoves = [...newPossibleMoves, ...temp]
+    });
+    console.log(newPossibleMoves)
+
+
+
+    res.json(newPossibleMoves);
   } catch (error) {
     console.error(err.message);
   }
